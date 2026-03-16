@@ -1,0 +1,2236 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تركي للخدمات العامة | Turki General Services</title>
+    <link rel="icon" type="image/jpeg" href="./img/logo.jpeg" />
+    <link rel="shortcut icon" type="image/jpeg" href="./img/logo.jpeg" />
+    <link rel="apple-touch-icon" href="./img/logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --black: #0a0a0a;
+        --white: #f5f2ed;
+        --gold: #c9a84c;
+        --gold-light: #e8c97a;
+        --gold-dark: #9a7230;
+        --gray: #1a1a1a;
+        --gray-mid: #2d2d2d;
+        --gray-light: #888;
+        --accent: #c9a84c;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 110px;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--black);
+        color: var(--white);
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      img {
+        border-radius: 10px;
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+      }
+
+      /* CUSTOM CURSOR */
+      .cursor {
+        width: 10px;
+        height: 10px;
+        background: var(--gold);
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease;
+      }
+      .cursor-ring {
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(201, 168, 76, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.15s ease,
+          width 0.3s,
+          height 0.3s;
+      }
+
+      /* LANGUAGE TOGGLE */
+      .lang-toggle {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        display: flex;
+        gap: 4px;
+      }
+      .lang-btn {
+        padding: 8px 16px;
+        border: 1px solid rgba(201, 168, 76, 0.4);
+        background: transparent;
+        color: var(--gray-light);
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        font-size: 12px;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+      }
+      .lang-btn.active {
+        background: var(--gold);
+        color: var(--black);
+        border-color: var(--gold);
+      }
+      .lang-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .lang-btn.active:hover {
+        color: var(--black);
+      }
+
+      /* NAVIGATION */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        padding: 22px clamp(20px, 4vw, 60px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        direction: rtl;
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 10, 10, 0.95),
+          transparent
+        );
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        transition: all 0.4s;
+      }
+      nav.scrolled {
+        background: rgba(10, 10, 10, 0.97);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        padding: 14px clamp(20px, 4vw, 60px);
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        order: 1;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 2;
+        text-decoration: none;
+      }
+      .nav-logo img {
+        height: 48px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        border-radius: 8px;
+        filter: none;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+      }
+      .nav-logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+      .nav-logo-text .name {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .nav-logo-text .sub {
+        font-size: 10px;
+        color: var(--gold);
+        letter-spacing: 2px;
+        font-family: "Cairo", sans-serif;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        list-style: none;
+        align-items: center;
+        order: 2;
+        margin: 0;
+      }
+      .nav-links a {
+        color: var(--gray-light);
+        text-decoration: none;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+        transition: color 0.3s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-cta {
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold) !important;
+        padding: 10px 24px;
+      }
+      .nav-cta:hover {
+        background: var(--gold) !important;
+        color: var(--black) !important;
+      }
+      .nav-cta::after {
+        display: none !important;
+      }
+
+      /* HERO */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        padding: 120px 60px 80px;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 70% 50%,
+            rgba(201, 168, 76, 0.07) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 20% 80%,
+            rgba(201, 168, 76, 0.04) 0%,
+            transparent 50%
+          );
+      }
+
+      .hero-grid-lines {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        opacity: 0.04;
+      }
+      .hero-grid-lines::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(201, 168, 76, 1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(201, 168, 76, 1) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-text {
+        order: 2;
+      }
+      .hero-visual {
+        order: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        padding: 6px 16px;
+        margin-bottom: 28px;
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: var(--gold);
+        font-family: "Cairo", sans-serif;
+        text-transform: uppercase;
+        animation: fadeInDown 0.8s ease both;
+      }
+      .hero-badge .dot {
+        width: 6px;
+        height: 6px;
+        background: var(--gold);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      .hero-title {
+        font-size: clamp(42px, 5vw, 68px);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        animation: fadeInDown 0.8s ease 0.1s both;
+      }
+      .hero-title .gold {
+        color: var(--gold);
+      }
+      .hero-title .outline {
+        -webkit-text-stroke: 1px var(--white);
+        color: transparent;
+      }
+
+      .hero-subtitle {
+        font-family: "Cairo", sans-serif;
+        font-size: 13px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 24px;
+        animation: fadeInDown 0.8s ease 0.15s both;
+      }
+
+      .hero-desc {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #aaa;
+        max-width: 480px;
+        margin-bottom: 40px;
+        animation: fadeInDown 0.8s ease 0.2s both;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        animation: fadeInDown 0.8s ease 0.25s both;
+      }
+
+      .btn-primary {
+        background: var(--gold);
+        color: var(--black);
+        padding: 16px 36px;
+        border: none;
+        font-family: "Cairo", sans-serif;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        clip-path: polygon(
+          0 0,
+          calc(100% - 12px) 0,
+          100% 12px,
+          100% 100%,
+          12px 100%,
+          0 calc(100% - 12px)
+        );
+      }
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--white);
+        transform: translateX(-100%);
+        transition: transform 0.4s;
+      }
+      .btn-primary:hover {
+        color: var(--black);
+      }
+      .btn-primary:hover::after {
+        transform: translateX(0);
+      }
+      .btn-primary span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--white);
+        padding: 16px 36px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-family: "Cairo", sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s;
+      }
+      .btn-secondary:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      .hero-visual-inner {
+        position: relative;
+        width: 320px;
+        height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-logo-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        animation: spin 20s linear infinite;
+      }
+      .hero-logo-ring::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        background: var(--gold);
+        border-radius: 50%;
+        transform: translateX(-50%);
+      }
+      .hero-logo-ring-2 {
+        position: absolute;
+        inset: 30px;
+        border-radius: 50%;
+        border: 1px dashed rgba(201, 168, 76, 0.1);
+        animation: spin 15s linear infinite reverse;
+      }
+
+      .hero-logo-box {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.96),
+          rgba(242, 238, 230, 0.96)
+        );
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        animation: fadeIn 1.2s ease both;
+      }
+      .hero-logo-box::before,
+      .hero-logo-box::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-color: var(--gold);
+        border-style: solid;
+      }
+      .hero-logo-box::before {
+        top: -1px;
+        right: -1px;
+        border-width: 2px 2px 0 0;
+      }
+      .hero-logo-box::after {
+        bottom: -1px;
+        left: -1px;
+        border-width: 0 0 2px 2px;
+      }
+      .hero-logo-box img {
+        width: 150px;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.26);
+        filter: none;
+      }
+
+      /* STATS */
+      .stats-bar {
+        background: var(--gray);
+        border-top: 1px solid rgba(201, 168, 76, 0.15);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        padding: 40px 60px;
+      }
+      .stats-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+      }
+      .stat-item {
+        text-align: center;
+      }
+      .stat-num {
+        font-size: 48px;
+        font-weight: 900;
+        color: var(--gold);
+        font-family: "Cairo", sans-serif;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .stat-label {
+        font-size: 13px;
+        color: #888;
+        letter-spacing: 1px;
+      }
+
+      /* SERVICES */
+      #services {
+        padding: 120px 60px;
+        position: relative;
+        overflow: hidden;
+      }
+      .section-header {
+        max-width: 1200px;
+        margin: 0 auto 80px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      .section-tag {
+        font-family: "Cairo", sans-serif;
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .section-tag::before {
+        content: "";
+        width: 40px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .section-title {
+        font-size: clamp(32px, 4vw, 52px);
+        font-weight: 900;
+        line-height: 1.1;
+      }
+      .section-title span {
+        color: var(--gold);
+      }
+
+      .services-intro {
+        max-width: 1200px;
+        margin: 0 auto 34px;
+        padding: 28px 30px;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 168, 76, 0.12) 0%,
+          rgba(201, 168, 76, 0.03) 55%,
+          transparent 100%
+        );
+        border: 1px solid rgba(201, 168, 76, 0.25);
+        border-right: 4px solid var(--gold);
+      }
+      .services-intro p {
+        font-size: 15px;
+        line-height: 2;
+        color: #c9c9c9;
+      }
+      .services-intro strong {
+        color: var(--white);
+      }
+
+      .services-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .service-card {
+        background: var(--gray);
+        padding: 48px 36px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s;
+        border: 1px solid rgba(201, 168, 76, 0.14);
+        border-radius: 14px;
+      }
+      .service-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 168, 76, 0.08) 0%,
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .service-card:hover {
+        border-color: rgba(201, 168, 76, 0.3);
+        transform: translateY(-4px);
+      }
+      .service-card:hover::before {
+        opacity: 1;
+      }
+
+      .service-num {
+        font-family: "Cairo", sans-serif;
+        font-size: 64px;
+        font-weight: 700;
+        color: rgba(201, 168, 76, 0.1);
+        line-height: 1;
+        margin-bottom: 24px;
+        transition: color 0.4s;
+      }
+      .service-card:hover .service-num {
+        color: rgba(201, 168, 76, 0.25);
+      }
+
+      .service-icon {
+        width: 56px;
+        height: 56px;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        transition: all 0.4s;
+      }
+      .service-card:hover .service-icon {
+        background: var(--gold);
+        border-color: var(--gold);
+      }
+
+      .service-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--white);
+      }
+      .service-desc {
+        font-size: 14px;
+        line-height: 1.8;
+        color: #888;
+      }
+
+      .service-arrow {
+        margin-top: 24px;
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 18px;
+        transition: all 0.4s;
+      }
+      .service-card:hover .service-arrow {
+        background: var(--gold);
+        color: var(--black);
+      }
+
+      /* WHY US */
+      #why {
+        padding: 120px 60px;
+        background: var(--gray);
+        position: relative;
+        overflow: hidden;
+      }
+      #why::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          ellipse,
+          rgba(201, 168, 76, 0.06) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .why-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+        align-items: center;
+      }
+      .why-visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .why-img-box {
+        width: 100%;
+        aspect-ratio: 1;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.94),
+          rgba(241, 236, 226, 0.94)
+        );
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        max-width: 420px;
+      }
+      .why-img-box img {
+        width: 60%;
+        opacity: 1;
+        border-radius: 12px;
+        border: 1px solid rgba(201, 168, 76, 0.28);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+        filter: none;
+      }
+      .why-img-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 168, 76, 0.05) 0%,
+          transparent 60%
+        );
+      }
+      .why-img-badge {
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        width: 140px;
+        height: 140px;
+        background: var(--gold);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+      }
+      .why-img-badge .num {
+        font-size: 44px;
+        line-height: 1;
+        color: var(--black);
+        font-family: "Cairo", sans-serif;
+      }
+      .why-img-badge .txt {
+        font-size: 11px;
+        color: var(--black);
+        letter-spacing: 1px;
+        text-align: center;
+      }
+
+      .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .feature-item {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        padding: 28px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transition: all 0.3s;
+      }
+      .feature-item:hover {
+        padding-right: 12px;
+      }
+      .feature-icon-box {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        background: rgba(201, 168, 76, 0.08);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        transition: all 0.3s;
+      }
+      .feature-item:hover .feature-icon-box {
+        background: var(--gold);
+      }
+      .feature-text h4 {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: var(--white);
+      }
+      .feature-text p {
+        font-size: 14px;
+        color: #888;
+        line-height: 1.7;
+      }
+
+      /* CONTACT */
+      #contact {
+        padding: 120px 60px;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+      .contact-info {
+      }
+      .contact-desc {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #888;
+        margin-bottom: 48px;
+      }
+
+      .contact-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .contact-item {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 24px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .contact-icon {
+        width: 52px;
+        height: 52px;
+        flex-shrink: 0;
+        background: rgba(201, 168, 76, 0.08);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+      .contact-detail {
+        flex: 1;
+      }
+      .contact-detail .label {
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: var(--gold);
+        text-transform: uppercase;
+        font-family: "Cairo", sans-serif;
+        margin-bottom: 4px;
+      }
+      .contact-detail .value {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--white);
+      }
+      .contact-detail a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .contact-detail a:hover {
+        color: var(--gold);
+      }
+
+      .contact-form {
+        background: var(--gray);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        padding: 48px;
+      }
+      .form-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 32px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: var(--gold);
+        text-transform: uppercase;
+        font-family: "Cairo", sans-serif;
+        margin-bottom: 8px;
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        padding: 14px 18px;
+        font-family: "Cairo", sans-serif;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.3s;
+        -webkit-appearance: none;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        border-color: var(--gold);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+      .form-group select option {
+        background: var(--gray);
+        color: var(--white);
+      }
+
+      .form-submit {
+        width: 100%;
+        background: var(--gold);
+        color: var(--black);
+        padding: 18px;
+        border: none;
+        font-family: "Cairo", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+        clip-path: polygon(
+          0 0,
+          calc(100% - 12px) 0,
+          100% 12px,
+          100% 100%,
+          12px 100%,
+          0 calc(100% - 12px)
+        );
+      }
+      .form-submit:hover {
+        background: var(--gold-light);
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--gray);
+        border-top: 1px solid rgba(201, 168, 76, 0.15);
+        padding: 60px 60px 30px;
+      }
+      .footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 50px;
+      }
+      .footer-logo {
+        display: flex;
+        gap: 0;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .footer-logo img {
+        height: 46px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        border-radius: 8px;
+        filter: none;
+      }
+      .footer-about {
+        font-size: 14px;
+        line-height: 1.8;
+        color: #777;
+        max-width: 280px;
+      }
+
+      .footer-col h5 {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--gold);
+        text-transform: uppercase;
+        font-family: "Cairo", sans-serif;
+        margin-bottom: 20px;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col li {
+        margin-bottom: 10px;
+      }
+      .footer-col a {
+        color: #777;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s;
+      }
+      .footer-col a:hover {
+        color: var(--gold);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-copy {
+        font-size: 13px;
+        color: #555;
+      }
+      .footer-copy span {
+        color: var(--gold);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 12px;
+      }
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #777;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s;
+      }
+      .social-link:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      /* FLOATING BUTTONS */
+      .float-left,
+      .float-right {
+        position: fixed;
+        bottom: 36px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .float-left {
+        left: 36px;
+      }
+      .float-right {
+        right: 36px;
+      }
+      .float-btn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        transition: all 0.3s;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+      .whatsapp-btn {
+        background: #25d366;
+        font-size: 24px;
+      }
+      .whatsapp-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
+      }
+      .back-top-btn {
+        background: var(--gold);
+        color: var(--black);
+        font-size: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s;
+        pointer-events: none;
+      }
+      .back-top-btn.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+      }
+      .back-top-btn:hover {
+        background: var(--gold-light);
+        transform: translateY(-3px) scale(1.05);
+      }
+
+      .float-pulse {
+        position: absolute;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: rgba(37, 211, 102, 0.3);
+        animation: floatPulse 2s ease infinite;
+      }
+
+      /* SECTION DIVIDER */
+      .divider {
+        max-width: 1200px;
+        margin: 0 auto;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(201, 168, 76, 0.3),
+          transparent
+        );
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.5);
+        }
+      }
+      @keyframes floatPulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        70% {
+          transform: scale(2);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* LTR styles */
+      body.ltr {
+        font-family: "Cairo", sans-serif;
+        direction: ltr;
+      }
+      body.ltr .hero-text {
+        order: 1;
+      }
+      body.ltr .hero-visual {
+        order: 2;
+      }
+      body.ltr .nav-links {
+        order: 1;
+        direction: ltr;
+      }
+      body.ltr .nav-logo {
+        order: 2;
+      }
+      body.ltr nav {
+        direction: ltr;
+      }
+      body.ltr .lang-toggle {
+        left: auto;
+        right: 20px;
+      }
+      body:not(.ltr) .nav-links {
+        direction: rtl;
+        order: 2;
+      }
+      body:not(.ltr) .nav-logo {
+        order: 1;
+      }
+
+      [data-ar] {
+        display: block;
+      }
+      [data-en] {
+        display: none;
+      }
+      body.ltr [data-ar] {
+        display: none;
+      }
+      body.ltr [data-en] {
+        display: block;
+      }
+      [data-ar-inline] {
+        display: inline;
+      }
+      [data-en-inline] {
+        display: none;
+      }
+      body.ltr [data-ar-inline] {
+        display: none;
+      }
+      body.ltr [data-en-inline] {
+        display: inline;
+      }
+
+      /* Arabic readability tuning */
+      body:not(.ltr) .nav-links a {
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+      body:not(.ltr) .hero-badge {
+        font-size: 12px;
+        letter-spacing: 2px;
+      }
+      body:not(.ltr) .hero-subtitle {
+        font-size: 14px;
+        letter-spacing: 2px;
+      }
+      body:not(.ltr) .section-tag {
+        font-size: 12px;
+        letter-spacing: 2px;
+      }
+      body:not(.ltr) .service-desc,
+      body:not(.ltr) .feature-text p,
+      body:not(.ltr) .contact-desc,
+      body:not(.ltr) .footer-about,
+      body:not(.ltr) .footer-col a,
+      body:not(.ltr) .footer-copy {
+        font-size: 15px;
+        line-height: 1.9;
+      }
+      body:not(.ltr) .contact-detail .label,
+      body:not(.ltr) .form-group label {
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        nav {
+          padding: 20px 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        #hero {
+          padding: 100px 24px 60px;
+        }
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          text-align: center;
+        }
+        .hero-visual {
+          display: none;
+        }
+        .hero-badge {
+          justify-content: center;
+        }
+        .stats-inner {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 0 24px;
+        }
+        .stats-bar {
+          padding: 40px 24px;
+        }
+        #services,
+        #why,
+        #contact {
+          padding: 80px 24px;
+        }
+        .services-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        .section-header {
+          flex-direction: column;
+          gap: 20px;
+          align-items: flex-start;
+        }
+        .why-inner {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
+        .why-visual {
+          display: none;
+        }
+        .contact-inner {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
+        footer {
+          padding: 60px 24px 30px;
+        }
+        .footer-top {
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+        .hero-actions {
+          justify-content: center;
+        }
+        .float-left {
+          bottom: 20px;
+          left: 20px;
+        }
+        .float-right {
+          bottom: 20px;
+          right: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+      <button
+        class="lang-btn active"
+        data-lang="ar"
+        onclick="setLang('ar', this)"
+      >
+        عربي
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en', this)">
+        EN
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+      <a href="#hero" class="nav-logo">
+        <img
+          src="./img/logo.jpeg"
+          alt="Logo"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+      <ul class="nav-links">
+        <li>
+          <a href="#services" data-ar>خدماتنا</a
+          ><a href="#services" data-en style="display: none">Services</a>
+        </li>
+        <li>
+          <a href="#why" data-ar>لماذا نحن</a
+          ><a href="#why" data-en style="display: none">Why Us</a>
+        </li>
+        <li>
+          <a href="#contact" data-ar>تواصل معنا</a
+          ><a href="#contact" data-en style="display: none">Contact</a>
+        </li>
+        <li>
+          <a href="tel:+966553929690" class="nav-cta" data-ar>اتصل الآن</a
+          ><a
+            href="tel:+966553929690"
+            class="nav-cta"
+            data-en
+            style="display: none"
+            >Call Now</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-grid-lines"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            <span data-ar-inline>الخدمات العامة المتكاملة</span>
+            <span data-en-inline style="display: none"
+              >INTEGRATED GENERAL SERVICES</span
+            >
+          </div>
+          <div class="hero-subtitle" data-ar>تميّز بلا حدود</div>
+          <div class="hero-subtitle" data-en style="display: none">
+            EXCELLENCE WITHOUT LIMITS
+          </div>
+          <h1 class="hero-title">
+            <span data-ar
+              >تركي<br /><span class="gold">للخدمات</span><br /><span
+                class="outline"
+                >العامة</span
+              ></span
+            >
+            <span data-en style="display: none"
+              >Turki<br /><span class="gold">General</span><br /><span
+                class="outline"
+                >Services</span
+              ></span
+            >
+          </h1>
+          <p class="hero-desc" data-ar>
+            نقدم خدمات متكاملة واحترافية بأعلى معايير الجودة. شريكك الموثوق في
+            كل مشاريعك ومتطلباتك اليومية والتشغيلية.
+          </p>
+          <p class="hero-desc" data-en style="display: none">
+            We deliver integrated and professional services to the highest
+            quality standards. Your trusted partner for all projects and
+            operational requirements.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary"
+              ><span data-ar-inline>تواصل معنا</span
+              ><span data-en-inline style="display: none">Get in Touch</span></a
+            >
+            <a href="#services" class="btn-secondary" data-ar
+              >استكشف خدماتنا ←</a
+            >
+            <a
+              href="#services"
+              class="btn-secondary"
+              data-en
+              style="display: none"
+              >Explore Services →</a
+            >
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-visual-inner">
+            <div class="hero-logo-ring"></div>
+            <div class="hero-logo-ring-2"></div>
+            <div class="hero-logo-box">
+              <img
+                src="./img/logo.jpeg"
+                alt="Turki Logo"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat-item reveal">
+          <div class="stat-num" id="stat1">0</div>
+          <div class="stat-label" data-ar>سنوات الخبرة</div>
+          <div class="stat-label" data-en style="display: none">
+            Years of Experience
+          </div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-num" id="stat2">0</div>
+          <div class="stat-label" data-ar>مشروع منجز</div>
+          <div class="stat-label" data-en style="display: none">
+            Projects Completed
+          </div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-num" id="stat3">0</div>
+          <div class="stat-label" data-ar>عميل راضٍ</div>
+          <div class="stat-label" data-en style="display: none">
+            Satisfied Clients
+          </div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-num" id="stat4">0</div>
+          <div class="stat-label" data-ar>خدمة متكاملة</div>
+          <div class="stat-label" data-en style="display: none">
+            Integrated Services
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-header reveal">
+        <div>
+          <div class="section-tag" data-ar>ما نقدمه</div>
+          <div class="section-tag" data-en style="display: none">
+            WHAT WE OFFER
+          </div>
+          <h2 class="section-title">
+            <span data-ar>خدماتنا <span>المتميزة</span></span>
+            <span data-en style="display: none"
+              >Our <span>Premium</span> Services</span
+            >
+          </h2>
+        </div>
+      </div>
+
+      <div class="services-intro reveal">
+        <p data-ar>
+          <strong>نبذة عن مكتب الخدمات:</strong> مكتب الخدمات يقدم حلول متكاملة
+          لتسهيل جميع المعاملات للأفراد والشركات بسرعة واحترافية. نركز على توفير
+          وقتك وضمان دقة الإجراءات مع متابعة جميع التفاصيل حتى إنجاز الخدمة
+          بالكامل.
+        </p>
+        <p data-en style="display: none">
+          <strong>About Our Services Office:</strong> We provide integrated
+          solutions to simplify all transactions for individuals and businesses
+          with speed and professionalism. We focus on saving your time, ensuring
+          procedural accuracy, and following every detail through to full
+          completion.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-num">01</div>
+          <div class="service-icon">🏛️</div>
+          <h3 class="service-title" data-ar>الخدمات الحكومية</h3>
+          <h3 class="service-title" data-en style="display: none">
+            Government Services
+          </h3>
+          <p class="service-desc" data-ar>
+            إصدار وتجديد الهوية والإقامة والجوازات، تصاريح العمل، وإنجاز خدمات
+            أبشر بدقة وسرعة.
+          </p>
+          <p class="service-desc" data-en style="display: none">
+            Issuance and renewal of IDs, residency permits, passports, work
+            permits, and Absher services with speed and precision.
+          </p>
+          <div class="service-arrow">→</div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-num">02</div>
+          <div class="service-icon">🏢</div>
+          <h3 class="service-title" data-ar>الخدمات العقارية والتجارية</h3>
+          <h3 class="service-title" data-en style="display: none">
+            Real Estate & Commercial Services
+          </h3>
+          <p class="service-desc" data-ar>
+            توثيق عقود الإيجار، نقل الصكوك، استخراج التراخيص، وتقديم الاستشارات
+            العقارية والتجارية.
+          </p>
+          <p class="service-desc" data-en style="display: none">
+            Lease contract documentation, title deed transfer, licensing, and
+            professional real estate and commercial consulting.
+          </p>
+          <div class="service-arrow">→</div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-num">03</div>
+          <div class="service-icon">💼</div>
+          <h3 class="service-title" data-ar>الخدمات المالية والإدارية</h3>
+          <h3 class="service-title" data-en style="display: none">
+            Financial & Administrative Services
+          </h3>
+          <p class="service-desc" data-ar>
+            دفع الفواتير والضرائب، متابعة المعاملات البنكية، وإنهاء إجراءات
+            التوثيق والمعاملات الإدارية.
+          </p>
+          <p class="service-desc" data-en style="display: none">
+            Bill and tax payments, banking transaction follow-up, and handling
+            documentation and administrative procedures.
+          </p>
+          <div class="service-arrow">→</div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-num">04</div>
+          <div class="service-icon">🌐</div>
+          <h3 class="service-title" data-ar>الخدمات الإلكترونية</h3>
+          <h3 class="service-title" data-en style="display: none">
+            Digital Services
+          </h3>
+          <p class="service-desc" data-ar>
+            تفعيل الحسابات الرقمية، إدارة المنصات، التسويق الرقمي، وترجمة
+            المستندات والمراسلات.
+          </p>
+          <p class="service-desc" data-en style="display: none">
+            Digital account activation, platform management, digital marketing,
+            and translation of documents and correspondence.
+          </p>
+          <div class="service-arrow">→</div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-num">05</div>
+          <div class="service-icon">🧾</div>
+          <h3 class="service-title" data-ar>خدمات مخصصة للأفراد</h3>
+          <h3 class="service-title" data-en style="display: none">
+            Personalized Individual Services
+          </h3>
+          <p class="service-desc" data-ar>
+            حجز المواعيد، إصدار التذاكر، والمساعدة في المعاملات الطارئة
+            والمستعجلة بمتابعة دقيقة حتى الإنجاز.
+          </p>
+          <p class="service-desc" data-en style="display: none">
+            Appointment booking, ticket issuance, and urgent transaction
+            assistance with close follow-up until completion.
+          </p>
+          <div class="service-arrow">→</div>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-num">06</div>
+          <div class="service-icon">📂</div>
+          <h3 class="service-title" data-ar>خدمات المتابعة والدعم</h3>
+          <h3 class="service-title" data-en style="display: none">
+            Follow-up & Support Services
+          </h3>
+          <p class="service-desc" data-ar>
+            متابعة المعاملات خطوة بخطوة، تجهيز النماذج والمرفقات، وتحديثك بحالة
+            الطلب حتى اكتمال الخدمة.
+          </p>
+          <p class="service-desc" data-en style="display: none">
+            End-to-end transaction follow-up, preparation of forms and
+            attachments, and status updates until full completion.
+          </p>
+          <div class="service-arrow">→</div>
+        </div>
+      </div>
+    </section>
+
+    <div style="padding: 0 60px"><div class="divider"></div></div>
+
+    <!-- WHY US -->
+    <section id="why">
+      <div class="why-inner">
+        <div class="why-visual reveal">
+          <div class="why-img-box">
+            <img
+              src="./img/logo.jpeg"
+              alt="Turki Services"
+              loading="eager"
+              decoding="async"
+            />
+            <div class="why-img-badge">
+              <div class="num">10+</div>
+              <div class="txt" data-ar>سنوات خبرة</div>
+              <div class="txt" data-en style="display: none">Years Exp.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-tag reveal" data-ar>ميزتنا</div>
+          <div class="section-tag reveal" data-en style="display: none">
+            OUR ADVANTAGE
+          </div>
+          <h2 class="section-title reveal" style="margin-bottom: 48px">
+            <span data-ar>لماذا تختار <span>تركي</span><br />للخدمات؟</span>
+            <span data-en style="display: none"
+              >Why Choose <span>Turki</span><br />Services?</span
+            >
+          </h2>
+          <div class="features-list">
+            <div class="feature-item reveal">
+              <div class="feature-icon-box">✅</div>
+              <div class="feature-text">
+                <h4 data-ar>جودة لا تُضاهى</h4>
+                <h4 data-en style="display: none">Unmatched Quality</h4>
+                <p data-ar>
+                  نلتزم بأعلى معايير الجودة في كل خدمة نقدمها مع ضمان رضا العميل
+                  الكامل.
+                </p>
+                <p data-en style="display: none">
+                  We adhere to the highest quality standards in every service
+                  with full customer satisfaction guarantee.
+                </p>
+              </div>
+            </div>
+            <div class="feature-item reveal">
+              <div class="feature-icon-box">⚡</div>
+              <div class="feature-text">
+                <h4 data-ar>سرعة في الاستجابة</h4>
+                <h4 data-en style="display: none">Fast Response</h4>
+                <p data-ar>
+                  فريقنا متاح على مدار الساعة للتعامل مع طلباتكم بسرعة واحترافية
+                  عالية.
+                </p>
+                <p data-en style="display: none">
+                  Our team is available around the clock to handle your requests
+                  quickly and professionally.
+                </p>
+              </div>
+            </div>
+            <div class="feature-item reveal">
+              <div class="feature-icon-box">💎</div>
+              <div class="feature-text">
+                <h4 data-ar>أسعار تنافسية</h4>
+                <h4 data-en style="display: none">Competitive Pricing</h4>
+                <p data-ar>
+                  نوفر أفضل الخدمات بأسعار مناسبة تتناسب مع جميع الميزانيات دون
+                  المساس بالجودة.
+                </p>
+                <p data-en style="display: none">
+                  We provide the best services at reasonable prices that suit
+                  all budgets without compromising quality.
+                </p>
+              </div>
+            </div>
+            <div class="feature-item reveal">
+              <div class="feature-icon-box">🏆</div>
+              <div class="feature-text">
+                <h4 data-ar>فريق محترف ومؤهل</h4>
+                <h4 data-en style="display: none">
+                  Professional & Qualified Team
+                </h4>
+                <p data-ar>
+                  يضم فريقنا أمهر الفنيين والمهندسين ذوي الخبرة الواسعة في مختلف
+                  المجالات.
+                </p>
+                <p data-en style="display: none">
+                  Our team includes the most skilled technicians and engineers
+                  with extensive experience across all fields.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div
+        class="section-header reveal"
+        style="max-width: 1200px; margin: 0 auto 60px"
+      >
+        <div>
+          <div class="section-tag" data-ar>تواصل معنا</div>
+          <div class="section-tag" data-en style="display: none">
+            GET IN TOUCH
+          </div>
+          <h2 class="section-title">
+            <span data-ar>نحن هنا <span>لخدمتكم</span></span>
+            <span data-en style="display: none"
+              >We're Here <span>to Serve You</span></span
+            >
+          </h2>
+        </div>
+      </div>
+      <div class="contact-inner">
+        <div class="contact-info reveal">
+          <p class="contact-desc" data-ar>
+            تواصل معنا الآن للحصول على استشارة مجانية أو طلب الخدمة. فريقنا جاهز
+            لمساعدتك في أي وقت.
+          </p>
+          <p class="contact-desc" data-en style="display: none">
+            Contact us now for a free consultation or to request a service. Our
+            team is ready to assist you at any time.
+          </p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-detail">
+                <div class="label" data-ar>رقم الجوال</div>
+                <div class="label" data-en style="display: none">
+                  Phone Number
+                </div>
+                <div class="value">
+                  <a href="tel:+966553929690" dir="ltr">+966 55 392 9690</a>
+                </div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">💬</div>
+              <div class="contact-detail">
+                <div class="label">WhatsApp</div>
+                <div class="value">
+                  <a href="https://wa.me/966553929690" target="_blank" dir="ltr"
+                    >+966 55 392 9690</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-detail">
+                <div class="label" data-ar>الموقع</div>
+                <div class="label" data-en style="display: none">Location</div>
+                <div class="value" data-ar>المملكة العربية السعودية</div>
+                <div class="value" data-en style="display: none">
+                  Saudi Arabia
+                </div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">🕐</div>
+              <div class="contact-detail">
+                <div class="label" data-ar>ساعات العمل</div>
+                <div class="label" data-en style="display: none">
+                  Working Hours
+                </div>
+                <div class="value" data-ar>24/7 — على مدار الساعة</div>
+                <div class="value" data-en style="display: none">
+                  24/7 — Around the Clock
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form reveal">
+          <h3 class="form-title" data-ar>أرسل رسالتك</h3>
+          <h3 class="form-title" data-en style="display: none">
+            Send Your Message
+          </h3>
+          <div class="form-group">
+            <label data-ar>الاسم الكامل</label>
+            <label data-en style="display: none">Full Name</label>
+            <input type="text" id="fname" />
+          </div>
+          <div class="form-group">
+            <label data-ar>رقم الجوال</label>
+            <label data-en style="display: none">Phone Number</label>
+            <input type="tel" id="fphone" />
+          </div>
+          <div class="form-group">
+            <label data-ar>الخدمة المطلوبة</label>
+            <label data-en style="display: none">Requested Service</label>
+            <select id="fservice">
+              <option value="" data-ar>اختر الخدمة</option>
+              <option value="" data-en style="display: none">
+                Choose Service
+              </option>
+              <option data-ar>الخدمات الحكومية</option>
+              <option data-ar>الخدمات العقارية والتجارية</option>
+              <option data-ar>الخدمات المالية والإدارية</option>
+              <option data-ar>الخدمات الإلكترونية</option>
+              <option data-ar>خدمات مخصصة للأفراد</option>
+              <option data-ar>خدمات المتابعة والدعم</option>
+              <option data-en style="display: none">Government Services</option>
+              <option data-en style="display: none">
+                Real Estate & Commercial Services
+              </option>
+              <option data-en style="display: none">
+                Financial & Administrative Services
+              </option>
+              <option data-en style="display: none">Digital Services</option>
+              <option data-en style="display: none">
+                Personalized Individual Services
+              </option>
+              <option data-en style="display: none">
+                Follow-up & Support Services
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-ar>تفاصيل الطلب</label>
+            <label data-en style="display: none">Request Details</label>
+            <textarea id="fmessage"></textarea>
+          </div>
+          <button class="form-submit" onclick="sendWhatsApp()">
+            <span data-ar-inline>إرسال عبر واتساب 💬</span>
+            <span data-en-inline style="display: none"
+              >Send via WhatsApp 💬</span
+            >
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div>
+            <div class="footer-logo">
+              <img
+                src="./img/logo.jpeg"
+                alt="Logo"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <p class="footer-about" data-ar>
+              شريكك الموثوق في تقديم الخدمات العامة المتكاملة بأعلى معايير
+              الجودة والاحترافية في المملكة العربية السعودية.
+            </p>
+            <p class="footer-about" data-en style="display: none">
+              Your trusted partner for integrated general services with the
+              highest quality and professionalism standards in Saudi Arabia.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h5 data-ar>خدماتنا</h5>
+            <h5 data-en style="display: none">Services</h5>
+            <ul>
+              <li>
+                <a href="#services" data-ar>الخدمات الحكومية</a
+                ><a href="#services" data-en style="display: none"
+                  >Government Services</a
+                >
+              </li>
+              <li>
+                <a href="#services" data-ar>الخدمات العقارية والتجارية</a
+                ><a href="#services" data-en style="display: none"
+                  >Real Estate & Commercial Services</a
+                >
+              </li>
+              <li>
+                <a href="#services" data-ar>الخدمات المالية والإدارية</a
+                ><a href="#services" data-en style="display: none"
+                  >Financial & Administrative Services</a
+                >
+              </li>
+              <li>
+                <a href="#services" data-ar>الخدمات الإلكترونية</a
+                ><a href="#services" data-en style="display: none"
+                  >Digital Services</a
+                >
+              </li>
+              <li>
+                <a href="#services" data-ar>خدمات مخصصة للأفراد</a
+                ><a href="#services" data-en style="display: none"
+                  >Personalized Individual Services</a
+                >
+              </li>
+              <li>
+                <a href="#services" data-ar>خدمات المتابعة والدعم</a
+                ><a href="#services" data-en style="display: none"
+                  >Follow-up & Support Services</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5 data-ar>روابط سريعة</h5>
+            <h5 data-en style="display: none">Quick Links</h5>
+            <ul>
+              <li>
+                <a href="#hero" data-ar>الرئيسية</a
+                ><a href="#hero" data-en style="display: none">Home</a>
+              </li>
+              <li>
+                <a href="#services" data-ar>الخدمات</a
+                ><a href="#services" data-en style="display: none">Services</a>
+              </li>
+              <li>
+                <a href="#why" data-ar>لماذا نحن</a
+                ><a href="#why" data-en style="display: none">Why Us</a>
+              </li>
+              <li>
+                <a href="#contact" data-ar>تواصل معنا</a
+                ><a href="#contact" data-en style="display: none">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5 data-ar>تواصل</h5>
+            <h5 data-en style="display: none">Contact</h5>
+            <ul>
+              <li>
+                <a href="tel:+966553929690" dir="ltr">+966 55 392 9690</a>
+              </li>
+              <li>
+                <a href="https://wa.me/966553929690" target="_blank"
+                  >WhatsApp</a
+                >
+              </li>
+              <li>
+                <a href="#" data-ar>المملكة العربية السعودية</a
+                ><a href="#" data-en style="display: none">Saudi Arabia</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="footer-copy">
+            <span data-ar
+              >© 2025 <span>تركي للخدمات العامة</span>. جميع الحقوق
+              محفوظة.</span
+            >
+            <span data-en style="display: none"
+              >© 2025 <span>Turki General Services</span>. All Rights
+              Reserved.</span
+            >
+          </p>
+          <div class="social-links">
+            <a
+              href="https://wa.me/966553929690"
+              class="social-link"
+              target="_blank"
+              title="WhatsApp"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+            </a>
+            <a href="tel:+966553929690" class="social-link" title="Phone">📞</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- FLOATING BUTTONS -->
+    <div class="float-right">
+      <button
+        class="float-btn back-top-btn"
+        id="backTop"
+        onclick="scrollToTop()"
+        title="Back to Top"
+      >
+        ↑
+      </button>
+    </div>
+    <div class="float-left">
+      <div style="position: relative">
+        <div class="float-pulse"></div>
+        <a
+          href="https://wa.me/966553929690"
+          class="float-btn whatsapp-btn"
+          target="_blank"
+          title="WhatsApp"
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // CURSOR
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+        setTimeout(() => {
+          ring.style.left = e.clientX + "px";
+          ring.style.top = e.clientY + "px";
+        }, 60);
+      });
+      document.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener(
+          "mouseenter",
+          () => (ring.style.transform = "translate(-50%,-50%) scale(2)"),
+        );
+        el.addEventListener(
+          "mouseleave",
+          () => (ring.style.transform = "translate(-50%,-50%) scale(1)"),
+        );
+      });
+
+      // NAVBAR SCROLL
+      window.addEventListener("scroll", () => {
+        document
+          .getElementById("navbar")
+          .classList.toggle("scrolled", scrollY > 60);
+        document
+          .getElementById("backTop")
+          .classList.toggle("visible", scrollY > 400);
+      });
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // SMOOTH ANCHOR SCROLL WITH NAV OFFSET
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const targetId = link.getAttribute("href");
+          if (!targetId || targetId === "#") return;
+          const target = document.querySelector(targetId);
+          if (!target) return;
+
+          e.preventDefault();
+          const navHeight =
+            document.getElementById("navbar")?.offsetHeight || 0;
+          const top =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            navHeight -
+            12;
+
+          window.scrollTo({ top, behavior: "smooth" });
+        });
+      });
+
+      // LANGUAGE
+      function setLang(lang, clickedButton) {
+        document
+          .querySelectorAll(".lang-btn")
+          .forEach((b) => b.classList.remove("active"));
+        const activeBtn =
+          clickedButton ||
+          document.querySelector(`.lang-btn[data-lang="${lang}"]`);
+        if (activeBtn) activeBtn.classList.add("active");
+        if (lang === "en") {
+          document.body.classList.add("ltr");
+          document.documentElement.lang = "en";
+          document.documentElement.dir = "ltr";
+        } else {
+          document.body.classList.remove("ltr");
+          document.documentElement.lang = "ar";
+          document.documentElement.dir = "rtl";
+        }
+      }
+
+      // REVEAL ON SCROLL
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("visible"), i * 80);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      reveals.forEach((r) => observer.observe(r));
+
+      // COUNTER ANIMATION
+      function animateCounter(id, target, suffix = "+") {
+        let count = 0;
+        const step = target / 60;
+        const el = document.getElementById(id);
+        const timer = setInterval(() => {
+          count += step;
+          if (count >= target) {
+            count = target;
+            clearInterval(timer);
+          }
+          el.textContent = Math.floor(count) + suffix;
+        }, 25);
+      }
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            animateCounter("stat1", 10);
+            animateCounter("stat2", 500);
+            animateCounter("stat3", 300);
+            animateCounter("stat4", 20);
+            statsObserver.disconnect();
+          }
+        },
+        { threshold: 0.5 },
+      );
+      statsObserver.observe(document.querySelector(".stats-bar"));
+
+      // WHATSAPP FORM
+      function sendWhatsApp() {
+        const name = document.getElementById("fname").value;
+        const phone = document.getElementById("fphone").value;
+        const service = document.getElementById("fservice").value;
+        const msg = document.getElementById("fmessage").value;
+        const isEn = document.body.classList.contains("ltr");
+        let text = isEn
+          ? `Hello Turki General Services 👋\nName: ${name}\nPhone: ${phone}\nService: ${service}\nDetails: ${msg}`
+          : `مرحباً تركي للخدمات العامة 👋\nالاسم: ${name}\nالجوال: ${phone}\nالخدمة: ${service}\nالتفاصيل: ${msg}`;
+        window.open(
+          `https://wa.me/966553929690?text=${encodeURIComponent(text)}`,
+          "_blank",
+        );
+      }
+    </script>
+  </body>
+</html>
