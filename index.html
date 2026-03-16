@@ -101,10 +101,11 @@
 
       /* LANGUAGE TOGGLE */
       .lang-toggle {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 1000;
+        position: absolute;
+        top: 50%;
+        left: 24px;
+        transform: translateY(-50%);
+        z-index: 4;
         display: flex;
         gap: 4px;
       }
@@ -642,31 +643,91 @@
         gap: 20px;
       }
       .service-card {
-        background: var(--gray);
+        background:
+          radial-gradient(
+            140% 120% at 100% 0%,
+            rgba(201, 168, 76, 0.14) 0%,
+            rgba(201, 168, 76, 0.03) 36%,
+            transparent 68%
+          ),
+          linear-gradient(
+            155deg,
+            rgba(34, 34, 34, 0.96) 0%,
+            rgba(23, 23, 23, 0.98) 48%,
+            rgba(16, 16, 16, 0.98) 100%
+          );
         padding: 48px 36px;
         position: relative;
         overflow: hidden;
         transition: all 0.4s;
         border: 1px solid rgba(201, 168, 76, 0.14);
         border-radius: 14px;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          inset 0 -18px 32px rgba(0, 0, 0, 0.35),
+          0 18px 34px rgba(0, 0, 0, 0.28);
+        isolation: isolate;
       }
       .service-card::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(201, 168, 76, 0.08) 0%,
-          transparent 60%
-        );
-        opacity: 0;
+        background:
+          repeating-linear-gradient(
+            115deg,
+            rgba(255, 255, 255, 0.03) 0px,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 22px
+          ),
+          repeating-linear-gradient(
+            25deg,
+            rgba(201, 168, 76, 0.04) 0px,
+            rgba(201, 168, 76, 0.04) 1px,
+            transparent 1px,
+            transparent 28px
+          );
+        opacity: 0.45;
         transition: opacity 0.4s;
+        z-index: 0;
+      }
+      .service-card::after {
+        content: "";
+        position: absolute;
+        top: -55%;
+        left: -35%;
+        width: 210px;
+        height: 210px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.22) 0%,
+          rgba(201, 168, 76, 0.06) 42%,
+          transparent 72%
+        );
+        filter: blur(2px);
+        transition:
+          transform 0.45s ease,
+          opacity 0.45s ease;
+        opacity: 0.8;
+        z-index: 0;
+      }
+      .service-card > * {
+        position: relative;
+        z-index: 1;
       }
       .service-card:hover {
-        border-color: rgba(201, 168, 76, 0.3);
-        transform: translateY(-4px);
+        border-color: rgba(201, 168, 76, 0.42);
+        transform: translateY(-6px);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          inset 0 -14px 28px rgba(0, 0, 0, 0.35),
+          0 24px 44px rgba(0, 0, 0, 0.36);
       }
       .service-card:hover::before {
+        opacity: 0.72;
+      }
+      .service-card:hover::after {
+        transform: translate(26px, 22px) scale(1.12);
         opacity: 1;
       }
 
@@ -1321,7 +1382,8 @@
       }
       body.ltr .lang-toggle {
         left: auto;
-        right: 20px;
+        right: 24px;
+        transform: translateY(-50%);
       }
       body:not(.ltr) .nav-links {
         direction: rtl;
@@ -1344,14 +1406,29 @@
         nav {
           padding: 16px 20px;
         }
+        .lang-toggle {
+          left: 50%;
+          right: auto;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+        body.ltr .lang-toggle {
+          left: 50%;
+          right: auto;
+          transform: translate(-50%, -50%);
+        }
+        .lang-btn {
+          padding: 6px 11px;
+          font-size: 11px;
+        }
         .nav-toggle {
           display: inline-flex;
         }
         .nav-links {
           position: fixed;
           top: 78px;
-          left: 16px;
-          right: 16px;
+          left: 14px;
+          right: 14px;
           width: auto;
           max-width: none;
           margin: 0;
@@ -1498,6 +1575,9 @@
 
       /* RESPONSIVE */
       @media (max-width: 900px) {
+        :root {
+          --mobile-side-pad: 18px;
+        }
         nav {
           padding: 14px 16px;
           min-height: 78px;
@@ -1514,27 +1594,22 @@
           height: 40px;
           font-size: 18px;
         }
-        .lang-toggle {
-          top: 39px;
-          left: 50%;
-          right: auto;
-          transform: translateX(-50%);
-          z-index: 1001;
-        }
-        body.ltr .lang-toggle {
-          left: 50%;
-          right: auto;
-        }
-        .lang-btn {
-          padding: 6px 10px;
-          font-size: 11px;
-        }
         #hero {
-          padding: 100px 24px 60px;
+          padding: 100px var(--mobile-side-pad) 60px;
         }
         .hero-content {
           grid-template-columns: 1fr;
           gap: 40px;
+          text-align: center;
+        }
+        .hero-text,
+        body:not(.ltr) .hero-text {
+          text-align: center !important;
+        }
+        .hero-desc,
+        body:not(.ltr) .hero-desc {
+          margin-left: auto;
+          margin-right: auto;
           text-align: center;
         }
         .hero-visual {
@@ -1543,26 +1618,50 @@
         .hero-badge {
           justify-content: center;
         }
+        .hero-actions,
+        body:not(.ltr) .hero-actions {
+          justify-content: center !important;
+        }
         .stats-inner {
           grid-template-columns: repeat(2, 1fr);
-          padding: 0 24px;
+          padding: 0;
+          gap: 18px;
         }
         .stats-bar {
-          padding: 40px 24px;
+          padding: 40px var(--mobile-side-pad);
         }
         #services,
         #why,
         #contact {
-          padding: 80px 24px;
+          padding: 80px var(--mobile-side-pad);
+        }
+        div[style*="padding: 0 60px"] {
+          padding: 0 var(--mobile-side-pad) !important;
+        }
+        .section-header {
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+        }
+        .section-tag {
+          justify-content: center;
+        }
+        .services-intro {
+          text-align: center;
+          padding: 22px 18px;
         }
         .services-grid {
           grid-template-columns: 1fr;
           gap: 16px;
         }
-        .section-header {
-          flex-direction: column;
-          gap: 20px;
-          align-items: flex-start;
+        .service-card,
+        .service-title,
+        .service-desc,
+        .service-num {
+          text-align: center;
+        }
+        .service-arrow {
+          margin-inline: auto;
         }
         .why-inner {
           grid-template-columns: 1fr;
@@ -1571,21 +1670,67 @@
         .why-visual {
           display: none;
         }
+        .feature-item {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 12px;
+        }
+        .feature-item:hover {
+          padding-right: 0;
+        }
+        .feature-text,
+        .feature-text p,
+        body:not(.ltr) .feature-text,
+        body:not(.ltr) .feature-text p {
+          text-align: center !important;
+        }
         .contact-inner {
           grid-template-columns: 1fr;
           gap: 60px;
         }
+        .contact-desc,
+        body:not(.ltr) .contact-desc {
+          text-align: center;
+        }
+        .contact-item {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 12px;
+        }
+        .contact-detail,
+        body:not(.ltr) .contact-detail {
+          text-align: center !important;
+        }
         footer {
-          padding: 60px 24px 30px;
+          padding: 60px var(--mobile-side-pad) 30px;
         }
         .footer-top {
-          grid-template-columns: 1fr 1fr;
-          gap: 40px;
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .footer-col,
+        .footer-about,
+        .footer-copy,
+        body:not(.ltr) .footer-about,
+        body:not(.ltr) .footer-copy {
+          text-align: center !important;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .footer-col ul {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
         .footer-bottom {
           flex-direction: column;
           gap: 20px;
           text-align: center;
+        }
+        .social-links {
+          justify-content: center;
         }
         .hero-actions {
           justify-content: center;
@@ -1606,20 +1751,6 @@
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- Language Toggle -->
-    <div class="lang-toggle">
-      <button
-        class="lang-btn active"
-        data-lang="ar"
-        onclick="setLang('ar', this)"
-      >
-        عربي
-      </button>
-      <button class="lang-btn" data-lang="en" onclick="setLang('en', this)">
-        EN
-      </button>
-    </div>
-
     <!-- Navigation -->
     <nav id="navbar">
       <a href="#hero" class="nav-logo">
@@ -1630,6 +1761,18 @@
           decoding="async"
         />
       </a>
+      <div class="lang-toggle">
+        <button
+          class="lang-btn active"
+          data-lang="ar"
+          onclick="setLang('ar', this)"
+        >
+          عربي
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en', this)">
+          EN
+        </button>
+      </div>
       <button
         class="nav-toggle"
         id="navToggle"
@@ -1822,7 +1965,10 @@
             Issuance and renewal of IDs, residency permits, passports, work
             permits, and Absher services with speed and precision.
           </p>
-          <div class="service-arrow">→</div>
+          <div class="service-arrow">
+            <span data-ar-inline>←</span
+            ><span data-en-inline style="display: none">→</span>
+          </div>
         </div>
 
         <div class="service-card reveal">
@@ -1840,7 +1986,10 @@
             Lease contract documentation, title deed transfer, licensing, and
             professional real estate and commercial consulting.
           </p>
-          <div class="service-arrow">→</div>
+          <div class="service-arrow">
+            <span data-ar-inline>←</span
+            ><span data-en-inline style="display: none">→</span>
+          </div>
         </div>
 
         <div class="service-card reveal">
@@ -1858,7 +2007,10 @@
             Bill and tax payments, banking transaction follow-up, and handling
             documentation and administrative procedures.
           </p>
-          <div class="service-arrow">→</div>
+          <div class="service-arrow">
+            <span data-ar-inline>←</span
+            ><span data-en-inline style="display: none">→</span>
+          </div>
         </div>
 
         <div class="service-card reveal">
@@ -1876,7 +2028,10 @@
             Digital account activation, platform management, digital marketing,
             and translation of documents and correspondence.
           </p>
-          <div class="service-arrow">→</div>
+          <div class="service-arrow">
+            <span data-ar-inline>←</span
+            ><span data-en-inline style="display: none">→</span>
+          </div>
         </div>
 
         <div class="service-card reveal">
@@ -1896,7 +2051,10 @@
             Appointment booking, ticket issuance, and urgent transaction
             assistance with close follow-up until completion.
           </p>
-          <div class="service-arrow">→</div>
+          <div class="service-arrow">
+            <span data-ar-inline>←</span
+            ><span data-en-inline style="display: none">→</span>
+          </div>
         </div>
 
         <div class="service-card reveal">
@@ -1916,7 +2074,10 @@
             End-to-end transaction follow-up, preparation of forms and
             attachments, and status updates until full completion.
           </p>
-          <div class="service-arrow">→</div>
+          <div class="service-arrow">
+            <span data-ar-inline>←</span
+            ><span data-en-inline style="display: none">→</span>
+          </div>
         </div>
       </div>
     </section>
