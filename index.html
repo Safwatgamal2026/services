@@ -1402,11 +1402,19 @@
       body:not(.ltr) .testimonial-role {
         text-align: right;
       }
+      body:not(.ltr) .testimonial-stars {
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+      }
       body.ltr .testimonial-stars,
       body.ltr .testimonial-text,
       body.ltr .testimonial-name,
       body.ltr .testimonial-role {
         text-align: left;
+      }
+      body.ltr .testimonial-stars {
+        justify-content: flex-start;
+        flex-direction: row;
       }
       @media (min-width: 901px) {
         body:not(.ltr) #why .feature-item {
@@ -1842,6 +1850,10 @@
       }
       .whatsapp-btn {
         background: #25d366;
+        position: relative;
+        z-index: 2;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
       .whatsapp-btn i {
         color: #fff;
@@ -1868,6 +1880,8 @@
         border: 2px solid rgba(10, 10, 10, 0.9);
         box-shadow: 0 0 0 4px rgba(255, 42, 42, 0.16);
         animation: notifyPulse 1.8s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 3;
       }
       .back-top-btn {
         background: var(--gold);
@@ -1895,6 +1909,8 @@
         border-radius: 50%;
         background: rgba(37, 211, 102, 0.3);
         animation: floatPulse 2s ease infinite;
+        pointer-events: none;
+        z-index: 1;
       }
 
       /* SECTION DIVIDER */
@@ -2449,6 +2465,12 @@
         }
         .testimonial-card {
           padding: 24px 18px;
+        }
+        .testimonial-stars,
+        body:not(.ltr) .testimonial-stars,
+        body.ltr .testimonial-stars {
+          justify-content: center !important;
+          flex-direction: row !important;
         }
         .testimonial-nav {
           width: 36px;
@@ -3548,7 +3570,8 @@
               </li>
               <li>
                 <a href="https://wa.me/966553929690" target="_blank"
-                  >WhatsApp</a
+                  ><span data-ar>واتساب</span
+                  ><span data-en style="display: none">WhatsApp</span></a
                 >
               </li>
               <li>
