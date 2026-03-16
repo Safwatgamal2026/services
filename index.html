@@ -1198,6 +1198,216 @@
         color: #888;
         line-height: 1.7;
       }
+
+      /* TESTIMONIALS */
+      #testimonials {
+        padding: 120px 60px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(
+          180deg,
+          rgba(19, 19, 19, 0.92),
+          rgba(13, 13, 13, 0.92)
+        );
+      }
+      #testimonials::before {
+        content: "";
+        position: absolute;
+        top: -120px;
+        left: -120px;
+        width: 360px;
+        height: 360px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.1) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .testimonials-slider {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        touch-action: pan-y;
+      }
+      .testimonials-viewport {
+        overflow: hidden;
+      }
+      .testimonials-track {
+        display: flex;
+        direction: ltr;
+        will-change: transform;
+        transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .testimonial-slide {
+        min-width: 100%;
+        padding: 4px;
+      }
+      .testimonial-card {
+        background: linear-gradient(
+          150deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(201, 168, 76, 0.22);
+        border-radius: 16px;
+        padding: 30px 24px;
+        position: relative;
+        overflow: hidden;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.06),
+          0 16px 34px rgba(0, 0, 0, 0.25);
+        transition:
+          border-color 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+      .testimonial-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(201, 168, 76, 0.85),
+          transparent
+        );
+      }
+      .testimonial-card:hover {
+        border-color: rgba(201, 168, 76, 0.42);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          0 22px 40px rgba(0, 0, 0, 0.3);
+      }
+      .testimonial-stars {
+        display: flex;
+        gap: 4px;
+        color: var(--gold);
+        font-size: 13px;
+        margin-bottom: 14px;
+      }
+      .testimonial-text {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #c4c4c4;
+        margin-bottom: 18px;
+      }
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .testimonial-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        overflow: hidden;
+        flex-shrink: 0;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          0 10px 22px rgba(0, 0, 0, 0.22);
+      }
+      .testimonial-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 0;
+        border-radius: 50%;
+        box-shadow: none;
+      }
+      .testimonial-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .testimonial-role {
+        font-size: 13px;
+        color: #8d8d8d;
+      }
+      .testimonial-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        background: rgba(10, 10, 10, 0.82);
+        color: var(--gold);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+        transition: all 0.3s;
+      }
+      .testimonial-nav:focus-visible {
+        outline: 2px solid rgba(201, 168, 76, 0.85);
+        outline-offset: 2px;
+      }
+      .testimonial-nav:hover {
+        background: rgba(201, 168, 76, 0.16);
+        border-color: rgba(201, 168, 76, 0.72);
+      }
+      .testimonial-nav.prev {
+        left: -58px;
+      }
+      .testimonial-nav.next {
+        right: -58px;
+      }
+      .testimonial-dots {
+        margin-top: 18px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+      }
+      .testimonial-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(201, 168, 76, 0.45);
+        background: rgba(201, 168, 76, 0.18);
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+      .testimonial-dot:focus-visible {
+        outline: 2px solid rgba(201, 168, 76, 0.85);
+        outline-offset: 2px;
+      }
+      .testimonial-dot.active {
+        width: 28px;
+        background: var(--gold);
+        border-color: var(--gold);
+      }
+      body:not(.ltr) .testimonials-slider .testimonial-nav.prev {
+        left: auto;
+        right: -58px;
+      }
+      body:not(.ltr) .testimonials-slider .testimonial-nav.next {
+        right: auto;
+        left: -58px;
+      }
+      body:not(.ltr) .testimonial-author {
+        flex-direction: row-reverse;
+      }
+      body.ltr .testimonial-author {
+        flex-direction: row;
+      }
+      body:not(.ltr) .testimonial-stars,
+      body:not(.ltr) .testimonial-text,
+      body:not(.ltr) .testimonial-name,
+      body:not(.ltr) .testimonial-role {
+        text-align: right;
+      }
+      body.ltr .testimonial-stars,
+      body.ltr .testimonial-text,
+      body.ltr .testimonial-name,
+      body.ltr .testimonial-role {
+        text-align: left;
+      }
       @media (min-width: 901px) {
         body:not(.ltr) #why .feature-item {
           flex-direction: row-reverse;
@@ -1831,8 +2041,10 @@
         .contact-social-link,
         .whatsapp-notify,
         .contact-icon,
-        .contact-icon::after {
+        .contact-icon::after,
+        .testimonials-track {
           animation: none !important;
+          transition: none !important;
         }
       }
 
@@ -2209,6 +2421,7 @@
         }
         #services,
         #why,
+        #testimonials,
         #contact {
           padding: 80px var(--mobile-side-pad);
         }
@@ -2230,6 +2443,30 @@
         .services-grid {
           grid-template-columns: 1fr;
           gap: 16px;
+        }
+        .testimonials-slider {
+          max-width: 100%;
+        }
+        .testimonial-card {
+          padding: 24px 18px;
+        }
+        .testimonial-nav {
+          width: 36px;
+          height: 36px;
+        }
+        .testimonial-nav.prev {
+          left: 6px;
+        }
+        .testimonial-nav.next {
+          right: 6px;
+        }
+        body:not(.ltr) .testimonials-slider .testimonial-nav.prev {
+          left: auto;
+          right: 6px;
+        }
+        body:not(.ltr) .testimonials-slider .testimonial-nav.next {
+          right: auto;
+          left: 6px;
         }
         .service-card,
         .service-title,
@@ -2293,6 +2530,15 @@
         body:not(.ltr) .contact-detail .label,
         body:not(.ltr) .contact-detail .value {
           text-align: center !important;
+        }
+        .contact-social,
+        .contact-social-title,
+        body:not(.ltr) .contact-social-title {
+          text-align: center !important;
+        }
+        .contact-social-links {
+          justify-content: center;
+          align-items: center;
         }
         .contact-form {
           text-align: center;
@@ -2866,6 +3112,155 @@
       </div>
     </section>
 
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="section-header reveal">
+        <div>
+          <div class="section-tag" data-ar>آراء عملائنا</div>
+          <div class="section-tag" data-en style="display: none">
+            CLIENT TESTIMONIALS
+          </div>
+          <h2 class="section-title">
+            <span data-ar>ماذا يقول <span>عملاؤنا</span> عنا؟</span>
+            <span data-en style="display: none"
+              >What Our <span>Clients</span> Say</span
+            >
+          </h2>
+        </div>
+      </div>
+
+      <div class="testimonials-slider reveal" id="testimonialsSlider">
+        <button
+          class="testimonial-nav prev"
+          id="testiPrev"
+          type="button"
+          aria-label="Previous testimonial"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="testimonials-viewport">
+          <div class="testimonials-track" id="testimonialsTrack">
+            <article class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-stars" aria-hidden="true">
+                  <i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text" data-ar>
+                  تعامل احترافي وسرعة عالية في إنجاز معاملتي. الفريق كان
+                  متعاونًا خطوة بخطوة حتى تم الانتهاء بالكامل.
+                </p>
+                <p class="testimonial-text" data-en style="display: none">
+                  Professional service and excellent speed in completing my
+                  request. The team supported me step by step until everything
+                  was finalized.
+                </p>
+                <div class="testimonial-author">
+                  <span class="testimonial-avatar"
+                    ><img src="./img/client-1.svg" alt="Client 1"
+                  /></span>
+                  <div>
+                    <div class="testimonial-name" data-ar>أحمد الزهراني</div>
+                    <div class="testimonial-name" data-en style="display: none">
+                      Ahmed Alzahrani
+                    </div>
+                    <div class="testimonial-role" data-ar>عميل أفراد</div>
+                    <div class="testimonial-role" data-en style="display: none">
+                      Individual Client
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-stars" aria-hidden="true">
+                  <i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text" data-ar>
+                  أفضل مكتب تعاملت معه في الخدمات الحكومية والتجارية. دقة
+                  بالمواعيد ووضوح في كل التفاصيل.
+                </p>
+                <p class="testimonial-text" data-en style="display: none">
+                  The best office I have worked with for government and
+                  commercial services. Precise timing and complete clarity in
+                  every detail.
+                </p>
+                <div class="testimonial-author">
+                  <span class="testimonial-avatar"
+                    ><img src="./img/client-2.svg" alt="Client 2"
+                  /></span>
+                  <div>
+                    <div class="testimonial-name" data-ar>سارة القحطاني</div>
+                    <div class="testimonial-name" data-en style="display: none">
+                      Sarah Alqahtani
+                    </div>
+                    <div class="testimonial-role" data-ar>صاحبة نشاط تجاري</div>
+                    <div class="testimonial-role" data-en style="display: none">
+                      Business Owner
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-stars" aria-hidden="true">
+                  <i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text" data-ar>
+                  خدمة ممتازة جدًا والمتابعة مستمرة حتى بعد إتمام الطلب. أنصح
+                  بالتعامل معهم لكل من يبحث عن الثقة والجودة.
+                </p>
+                <p class="testimonial-text" data-en style="display: none">
+                  Outstanding service with continuous follow-up even after
+                  completion. Highly recommended for anyone looking for trust
+                  and quality.
+                </p>
+                <div class="testimonial-author">
+                  <span class="testimonial-avatar"
+                    ><img src="./img/client-3.svg" alt="Client 3"
+                  /></span>
+                  <div>
+                    <div class="testimonial-name" data-ar>محمد اليامي</div>
+                    <div class="testimonial-name" data-en style="display: none">
+                      Mohammed Alyami
+                    </div>
+                    <div class="testimonial-role" data-ar>عميل دائم</div>
+                    <div class="testimonial-role" data-en style="display: none">
+                      Returning Client
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button
+          class="testimonial-nav next"
+          id="testiNext"
+          type="button"
+          aria-label="Next testimonial"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="testimonial-dots" id="testimonialDots"></div>
+      </div>
+    </section>
+
     <!-- CONTACT -->
     <section id="contact">
       <div
@@ -3391,6 +3786,167 @@
         );
       }
 
+      // TESTIMONIALS SLIDER
+      function initTestimonialsSlider() {
+        const slider = document.getElementById("testimonialsSlider");
+        const track = document.getElementById("testimonialsTrack");
+        const slides = track ? Array.from(track.children) : [];
+        const prevBtn = document.getElementById("testiPrev");
+        const nextBtn = document.getElementById("testiNext");
+        const dotsWrap = document.getElementById("testimonialDots");
+
+        if (!slider || !track || !slides.length || !dotsWrap) return;
+        if (slider.dataset.sliderReady === "true") return;
+        slider.dataset.sliderReady = "true";
+
+        let index = 0;
+        let autoplayTimer = null;
+        let pointerStartX = null;
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        slider.setAttribute("role", "region");
+        slider.setAttribute("aria-roledescription", "carousel");
+        slider.setAttribute("tabindex", "0");
+
+        dotsWrap.innerHTML = "";
+        slides.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "testimonial-dot";
+          dot.setAttribute("aria-label", `Go to testimonial ${i + 1}`);
+          dot.setAttribute("aria-controls", "testimonialsTrack");
+          dot.addEventListener("click", () => {
+            goTo(i);
+            restartAutoplay();
+          });
+          dotsWrap.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsWrap.querySelectorAll(".testimonial-dot"));
+
+        function isRtl() {
+          return !document.body.classList.contains("ltr");
+        }
+
+        function logicalStep(rawStep) {
+          return isRtl() ? rawStep * -1 : rawStep;
+        }
+
+        function update() {
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((dot, i) => {
+            const isActive = i === index;
+            dot.classList.toggle("active", isActive);
+            dot.setAttribute("aria-current", isActive ? "true" : "false");
+          });
+          slider.setAttribute(
+            "aria-label",
+            `Testimonials slider: slide ${index + 1} of ${slides.length}`,
+          );
+        }
+
+        function goTo(nextIndex) {
+          const total = slides.length;
+          index = (nextIndex + total) % total;
+          update();
+        }
+
+        function next() {
+          goTo(index + logicalStep(1));
+        }
+
+        function prev() {
+          goTo(index + logicalStep(-1));
+        }
+
+        function stopAutoplay() {
+          if (!autoplayTimer) return;
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+
+        function startAutoplay() {
+          if (prefersReducedMotion) return;
+          stopAutoplay();
+          autoplayTimer = setInterval(next, 5200);
+        }
+
+        function restartAutoplay() {
+          startAutoplay();
+        }
+
+        prevBtn?.addEventListener("click", () => {
+          prev();
+          restartAutoplay();
+        });
+
+        nextBtn?.addEventListener("click", () => {
+          next();
+          restartAutoplay();
+        });
+
+        slider.addEventListener("mouseenter", stopAutoplay);
+        slider.addEventListener("mouseleave", startAutoplay);
+        slider.addEventListener("focusin", stopAutoplay);
+        slider.addEventListener("focusout", startAutoplay);
+
+        slider.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            if (isRtl()) prev();
+            else next();
+            restartAutoplay();
+          }
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            if (isRtl()) next();
+            else prev();
+            restartAutoplay();
+          }
+          if (e.key === "Home") {
+            e.preventDefault();
+            goTo(0);
+            restartAutoplay();
+          }
+          if (e.key === "End") {
+            e.preventDefault();
+            goTo(slides.length - 1);
+            restartAutoplay();
+          }
+        });
+
+        slider.addEventListener("pointerdown", (e) => {
+          if (!e.isPrimary) return;
+          pointerStartX = e.clientX;
+        });
+
+        slider.addEventListener("pointerup", (e) => {
+          if (!e.isPrimary || pointerStartX === null) return;
+          const delta = e.clientX - pointerStartX;
+          pointerStartX = null;
+
+          if (Math.abs(delta) < 40) return;
+
+          if (delta > 0) prev();
+          else next();
+          restartAutoplay();
+        });
+
+        slider.addEventListener("pointercancel", () => {
+          pointerStartX = null;
+        });
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) stopAutoplay();
+          else startAutoplay();
+        });
+
+        update();
+        startAutoplay();
+      }
+
       // RED AMBIENT PARTICLES (BOTTOM -> TOP)
       function initAmbientRedDots() {
         const layer = document.querySelector(".ambient-particles");
@@ -3421,6 +3977,7 @@
         }
       }
 
+      initTestimonialsSlider();
       initAmbientRedDots();
       let ambientResizeTimer;
       window.addEventListener("resize", () => {
