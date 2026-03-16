@@ -99,6 +99,116 @@
           height 0.3s;
       }
 
+      /* AMBIENT LAYERS */
+      .ambient-particles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .ambient-dot {
+        position: absolute;
+        left: var(--x, 50%);
+        bottom: -16px;
+        width: var(--size, 6px);
+        height: var(--size, 6px);
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 95, 95, 0.95) 0%,
+          rgba(255, 64, 64, 0.45) 55%,
+          transparent 100%
+        );
+        box-shadow: 0 0 16px rgba(255, 78, 78, 0.38);
+        opacity: var(--opacity, 0.45);
+        animation: ambientRise var(--dur, 12s) linear infinite;
+        animation-delay: var(--delay, 0s);
+      }
+
+      .floating-avatars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .avatar-chip {
+        position: absolute;
+        opacity: 0.45;
+      }
+      .avatar-shape {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .shape-ring {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        box-shadow:
+          inset 0 0 22px rgba(201, 168, 76, 0.1),
+          0 0 28px rgba(201, 168, 76, 0.18);
+        position: relative;
+      }
+      .shape-ring::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 50%;
+        border: 1px dashed rgba(201, 168, 76, 0.28);
+      }
+      .shape-diamond {
+        width: 56px;
+        height: 56px;
+        border: 1px solid rgba(255, 85, 85, 0.45);
+        background: linear-gradient(
+          145deg,
+          rgba(255, 85, 85, 0.2),
+          rgba(255, 85, 85, 0.03)
+        );
+        transform: rotate(45deg);
+        box-shadow:
+          inset 0 0 18px rgba(255, 85, 85, 0.16),
+          0 10px 30px rgba(255, 85, 85, 0.18);
+      }
+      .shape-hex {
+        width: 64px;
+        height: 56px;
+        background: linear-gradient(
+          145deg,
+          rgba(201, 168, 76, 0.2),
+          rgba(201, 168, 76, 0.03)
+        );
+        border: 1px solid rgba(201, 168, 76, 0.38);
+        clip-path: polygon(
+          25% 0%,
+          75% 0%,
+          100% 50%,
+          75% 100%,
+          25% 100%,
+          0% 50%
+        );
+        box-shadow:
+          inset 0 0 18px rgba(201, 168, 76, 0.12),
+          0 10px 28px rgba(0, 0, 0, 0.24);
+      }
+      .avatar-chip.a1 {
+        top: 18%;
+        right: 4%;
+        animation: avatarDriftOne 12s ease-in-out infinite;
+      }
+      .avatar-chip.a2 {
+        top: 52%;
+        left: 2.5%;
+        animation: avatarDriftTwo 14s ease-in-out infinite;
+      }
+      .avatar-chip.a3 {
+        bottom: 8%;
+        right: 9%;
+        animation: avatarDriftOne 16s ease-in-out infinite reverse;
+      }
+
       /* LANGUAGE TOGGLE */
       .lang-toggle {
         position: absolute;
@@ -387,10 +497,10 @@
         align-items: center;
         gap: 8px;
         border: 1px solid rgba(201, 168, 76, 0.3);
-        padding: 6px 16px;
+        padding: 8px 18px;
         margin-bottom: 28px;
-        font-size: 11px;
-        letter-spacing: 3px;
+        font-size: 13px;
+        letter-spacing: 2px;
         color: var(--gold);
         font-family: "Cairo", sans-serif;
         text-transform: uppercase;
@@ -425,8 +535,8 @@
 
       .hero-subtitle {
         font-family: "Cairo", sans-serif;
-        font-size: 13px;
-        letter-spacing: 4px;
+        font-size: 14px;
+        letter-spacing: 2.5px;
         text-transform: uppercase;
         color: var(--gold);
         margin-bottom: 24px;
@@ -720,8 +830,8 @@
       }
       .section-tag {
         font-family: "Cairo", sans-serif;
-        font-size: 11px;
-        letter-spacing: 4px;
+        font-size: 13px;
+        letter-spacing: 2.5px;
         color: var(--gold);
         text-transform: uppercase;
         margin-bottom: 16px;
@@ -958,12 +1068,27 @@
         grid-template-columns: 1fr 1fr;
         gap: 100px;
         align-items: center;
+        direction: ltr;
       }
       .why-visual {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+      body:not(.ltr) #why .why-visual {
+        order: 1;
+      }
+      body:not(.ltr) #why .why-inner > div:last-child {
+        order: 2;
+        text-align: right;
+      }
+      body.ltr #why .why-visual {
+        order: 2;
+      }
+      body.ltr #why .why-inner > div:last-child {
+        order: 1;
+        text-align: left;
       }
       .why-img-box {
         width: 100%;
@@ -1073,6 +1198,33 @@
         color: #888;
         line-height: 1.7;
       }
+      @media (min-width: 901px) {
+        body:not(.ltr) #why .feature-item {
+          flex-direction: row-reverse;
+        }
+        body:not(.ltr) #why .feature-item:hover {
+          padding-right: 0;
+          padding-left: 12px;
+        }
+        body:not(.ltr) #why .feature-text,
+        body:not(.ltr) #why .feature-text h4,
+        body:not(.ltr) #why .feature-text p {
+          text-align: right;
+        }
+
+        body.ltr #why .feature-item {
+          flex-direction: row;
+        }
+        body.ltr #why .feature-item:hover {
+          padding-right: 0;
+          padding-left: 12px;
+        }
+        body.ltr #why .feature-text,
+        body.ltr #why .feature-text h4,
+        body.ltr #why .feature-text p {
+          text-align: left;
+        }
+      }
 
       /* CONTACT */
       #contact {
@@ -1144,6 +1296,13 @@
         font-size: 18px;
         transition: transform 0.35s ease;
       }
+      .contact-phone-icon {
+        transform: scaleX(-1);
+        transition: transform 0.3s;
+      }
+      body.ltr .contact-phone-icon {
+        transform: scaleX(1);
+      }
       .contact-item:nth-child(2) .contact-icon {
         animation-delay: 0.25s;
       }
@@ -1163,6 +1322,77 @@
       }
       .contact-item:hover .contact-icon i {
         transform: scale(1.08);
+      }
+      .contact-social {
+        margin-top: 26px;
+      }
+      .contact-social-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      body:not(.ltr) .contact-social-title {
+        text-transform: none;
+        letter-spacing: 1px;
+      }
+      .contact-social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .contact-social-link {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        border: 1px solid rgba(201, 168, 76, 0.28);
+        background: linear-gradient(
+          145deg,
+          rgba(201, 168, 76, 0.12),
+          rgba(201, 168, 76, 0.04)
+        );
+        color: var(--gold-light);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          0 8px 20px rgba(0, 0, 0, 0.24);
+        transition:
+          transform 0.28s ease,
+          box-shadow 0.28s ease,
+          border-color 0.28s ease,
+          color 0.28s ease,
+          background 0.28s ease;
+        animation: socialFloat 4.8s ease-in-out infinite;
+      }
+      .contact-social-link i {
+        font-size: 18px;
+      }
+      .contact-social-link:nth-child(2) {
+        animation-delay: 0.18s;
+      }
+      .contact-social-link:nth-child(3) {
+        animation-delay: 0.36s;
+      }
+      .contact-social-link:nth-child(4) {
+        animation-delay: 0.54s;
+      }
+      .contact-social-link:hover {
+        transform: translateY(-4px) scale(1.05);
+        border-color: rgba(201, 168, 76, 0.65);
+        color: var(--gold);
+        background: linear-gradient(
+          145deg,
+          rgba(201, 168, 76, 0.22),
+          rgba(201, 168, 76, 0.08)
+        );
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.12),
+          0 14px 26px rgba(0, 0, 0, 0.3),
+          0 0 20px rgba(201, 168, 76, 0.2);
       }
       .contact-detail {
         flex: 1;
@@ -1411,6 +1641,24 @@
         transform: scale(1.1);
         box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
       }
+      .whatsapp-notify {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 4px;
+        border-radius: 999px;
+        background: #ff2a2a;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 18px;
+        text-align: center;
+        border: 2px solid rgba(10, 10, 10, 0.9);
+        box-shadow: 0 0 0 4px rgba(255, 42, 42, 0.16);
+        animation: notifyPulse 1.8s ease-in-out infinite;
+      }
       .back-top-btn {
         background: var(--gold);
         color: var(--black);
@@ -1503,6 +1751,37 @@
           opacity: 0;
         }
       }
+      @keyframes ambientRise {
+        0% {
+          transform: translate3d(0, 0, 0) scale(0.65);
+          opacity: 0;
+        }
+        12% {
+          opacity: var(--opacity, 0.45);
+        }
+        100% {
+          transform: translate3d(var(--drift, 0px), -120vh, 0) scale(1.1);
+          opacity: 0;
+        }
+      }
+      @keyframes avatarDriftOne {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-12px) rotate(8deg);
+        }
+      }
+      @keyframes avatarDriftTwo {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(12px) rotate(-10deg);
+        }
+      }
       @keyframes contactIconFloat {
         0%,
         100% {
@@ -1525,8 +1804,32 @@
           transform: scale(1.15);
         }
       }
+      @keyframes notifyPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 4px rgba(255, 42, 42, 0.16);
+        }
+        50% {
+          transform: scale(1.08);
+          box-shadow: 0 0 0 7px rgba(255, 42, 42, 0.08);
+        }
+      }
+      @keyframes socialFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-3px);
+        }
+      }
 
       @media (prefers-reduced-motion: reduce) {
+        .ambient-dot,
+        .avatar-chip,
+        .contact-social-link,
+        .whatsapp-notify,
         .contact-icon,
         .contact-icon::after {
           animation: none !important;
@@ -1711,8 +2014,8 @@
         letter-spacing: 0;
       }
       body:not(.ltr) .hero-badge {
-        font-size: 12px;
-        letter-spacing: 2px;
+        font-size: 14px;
+        letter-spacing: 1.6px;
       }
       body:not(.ltr) .hero-text {
         text-align: right;
@@ -1741,12 +2044,12 @@
         text-transform: none;
       }
       body:not(.ltr) .hero-subtitle {
-        font-size: 14px;
-        letter-spacing: 2px;
+        font-size: 15px;
+        letter-spacing: 1.6px;
       }
       body:not(.ltr) .section-tag {
-        font-size: 12px;
-        letter-spacing: 2px;
+        font-size: 14px;
+        letter-spacing: 1.6px;
       }
       body:not(.ltr) .service-desc,
       body:not(.ltr) .feature-text p,
@@ -1769,15 +2072,15 @@
           font-size: 15px;
         }
         body:not(.ltr) .hero-badge {
-          font-size: 13px;
+          font-size: 15px;
         }
         body:not(.ltr) .hero-subtitle {
-          font-size: 15px;
-          letter-spacing: 1.2px;
+          font-size: 16px;
+          letter-spacing: 1px;
         }
         body:not(.ltr) .section-tag {
-          font-size: 13px;
-          letter-spacing: 1.2px;
+          font-size: 15px;
+          letter-spacing: 1px;
         }
         body:not(.ltr) .stat-label {
           font-size: 15px;
@@ -1794,6 +2097,50 @@
 
       /* RESPONSIVE */
       @media (max-width: 900px) {
+        body,
+        body.ltr,
+        body:not(.ltr) {
+          text-align: center;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        a,
+        li,
+        label,
+        .section-title,
+        .section-tag,
+        .stat-label,
+        .service-title,
+        .service-desc,
+        .feature-text,
+        .contact-desc,
+        .contact-detail,
+        .form-title,
+        .footer-copy,
+        .footer-col h5,
+        .footer-col a,
+        body:not(.ltr) .section-title,
+        body:not(.ltr) .section-tag,
+        body:not(.ltr) .service-title,
+        body:not(.ltr) .service-desc,
+        body:not(.ltr) .feature-text,
+        body:not(.ltr) .contact-desc,
+        body:not(.ltr) .contact-detail,
+        body:not(.ltr) .footer-col h5,
+        body:not(.ltr) .footer-col a {
+          text-align: center !important;
+        }
+        .floating-avatars {
+          opacity: 0.28;
+        }
+        .ambient-dot {
+          opacity: calc(var(--opacity, 0.45) * 0.45);
+        }
         :root {
           --mobile-side-pad: 18px;
         }
@@ -2013,6 +2360,19 @@
     </style>
   </head>
   <body>
+    <div class="ambient-particles" aria-hidden="true"></div>
+    <div class="floating-avatars" aria-hidden="true">
+      <div class="avatar-chip a1">
+        <span class="avatar-shape shape-ring"></span>
+      </div>
+      <div class="avatar-chip a2">
+        <span class="avatar-shape shape-diamond"></span>
+      </div>
+      <div class="avatar-chip a3">
+        <span class="avatar-shape shape-hex"></span>
+      </div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
@@ -2537,7 +2897,9 @@
           </p>
           <div class="contact-items">
             <div class="contact-item">
-              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="contact-icon">
+                <i class="fa-solid fa-phone contact-phone-icon"></i>
+              </div>
               <div class="contact-detail">
                 <div class="label" data-ar>رقم الجوال</div>
                 <div class="label" data-en style="display: none">
@@ -2553,7 +2915,8 @@
                 <i class="fa-brands fa-whatsapp"></i>
               </div>
               <div class="contact-detail">
-                <div class="label">WhatsApp</div>
+                <div class="label" data-ar>واتساب</div>
+                <div class="label" data-en style="display: none">WhatsApp</div>
                 <div class="value">
                   <a href="https://wa.me/966553929690" target="_blank" dir="ltr"
                     >+966 55 392 9690</a
@@ -2586,6 +2949,49 @@
                   24/7 — Around the Clock
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="contact-social">
+            <div class="contact-social-title" data-ar>تابعنا</div>
+            <div class="contact-social-title" data-en style="display: none">
+              Follow Us
+            </div>
+            <div class="contact-social-links">
+              <a
+                href="https://wa.me/966553929690"
+                class="contact-social-link"
+                target="_blank"
+                aria-label="WhatsApp"
+                title="WhatsApp"
+              >
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+              <a
+                href="mailto:info@turki-services.com"
+                class="contact-social-link"
+                aria-label="Email"
+                title="Email"
+              >
+                <i class="fa-solid fa-envelope"></i>
+              </a>
+              <a
+                href="https://www.facebook.com/"
+                class="contact-social-link"
+                target="_blank"
+                aria-label="Facebook"
+                title="Facebook"
+              >
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a
+                href="https://www.tiktok.com/"
+                class="contact-social-link"
+                target="_blank"
+                aria-label="TikTok"
+                title="TikTok"
+              >
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -2807,6 +3213,7 @@
         >
           <i class="fa-brands fa-whatsapp"></i>
         </a>
+        <span class="whatsapp-notify" aria-hidden="true">1</span>
       </div>
     </div>
 
@@ -2983,6 +3390,43 @@
           "_blank",
         );
       }
+
+      // RED AMBIENT PARTICLES (BOTTOM -> TOP)
+      function initAmbientRedDots() {
+        const layer = document.querySelector(".ambient-particles");
+        if (!layer) return;
+
+        layer.innerHTML = "";
+        const count = window.innerWidth <= 900 ? 44 : 92;
+
+        for (let i = 0; i < count; i++) {
+          const dot = document.createElement("span");
+          dot.className = "ambient-dot";
+
+          const x = Math.random() * 100;
+          const size = 2 + Math.random() * 7;
+          const duration = 7 + Math.random() * 12;
+          const delay = -Math.random() * duration;
+          const drift = (Math.random() - 0.5) * 90;
+          const opacity = 0.2 + Math.random() * 0.55;
+
+          dot.style.setProperty("--x", `${x}%`);
+          dot.style.setProperty("--size", `${size.toFixed(2)}px`);
+          dot.style.setProperty("--dur", `${duration.toFixed(2)}s`);
+          dot.style.setProperty("--delay", `${delay.toFixed(2)}s`);
+          dot.style.setProperty("--drift", `${drift.toFixed(2)}px`);
+          dot.style.setProperty("--opacity", opacity.toFixed(2));
+
+          layer.appendChild(dot);
+        }
+      }
+
+      initAmbientRedDots();
+      let ambientResizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(ambientResizeTimer);
+        ambientResizeTimer = setTimeout(initAmbientRedDots, 220);
+      });
     </script>
   </body>
 </html>
