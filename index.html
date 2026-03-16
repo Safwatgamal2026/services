@@ -11,10 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8LJgyAHIhR35VZc2oM/gI1wZ9Y6zQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
@@ -51,6 +52,14 @@
         color: var(--white);
         overflow-x: hidden;
         cursor: none;
+        line-height: 1.7;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        line-height: 1.25;
       }
 
       img {
@@ -248,6 +257,24 @@
         display: none !important;
       }
 
+      .nav-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        background: rgba(10, 10, 10, 0.85);
+        color: var(--gold);
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 20px;
+        z-index: 4;
+      }
+      .nav-toggle:hover {
+        border-color: var(--gold);
+      }
+
       /* HERO */
       #hero {
         min-height: 100vh;
@@ -300,6 +327,7 @@
         align-items: center;
         position: relative;
         z-index: 2;
+        direction: ltr;
       }
 
       .hero-text {
@@ -1254,14 +1282,33 @@
 
       /* LTR styles */
       body.ltr {
-        font-family: "Cairo", sans-serif;
+        font-family: "Montserrat", "Cairo", sans-serif;
         direction: ltr;
+      }
+      body.ltr .lang-btn,
+      body.ltr .hero-subtitle,
+      body.ltr .section-tag,
+      body.ltr .stat-num,
+      body.ltr .contact-detail .label,
+      body.ltr .form-group label,
+      body.ltr .form-group input,
+      body.ltr .form-group textarea,
+      body.ltr .form-group select,
+      body.ltr .btn-primary,
+      body.ltr .btn-secondary,
+      body.ltr .form-submit,
+      body.ltr .footer-col h5 {
+        font-family: "Montserrat", "Cairo", sans-serif;
       }
       body.ltr .hero-text {
         order: 1;
+        text-align: left;
       }
       body.ltr .hero-visual {
         order: 2;
+      }
+      body.ltr .hero-actions {
+        justify-content: flex-start;
       }
       body.ltr .nav-links {
         direction: ltr;
@@ -1293,6 +1340,50 @@
         }
       }
 
+      @media (max-width: 1024px) {
+        nav {
+          padding: 16px 20px;
+        }
+        .nav-toggle {
+          display: inline-flex;
+        }
+        .nav-links {
+          position: fixed;
+          top: 78px;
+          left: 16px;
+          right: 16px;
+          width: auto;
+          max-width: none;
+          margin: 0;
+          transform: none;
+          background: rgba(16, 16, 16, 0.98);
+          border: 1px solid rgba(201, 168, 76, 0.2);
+          border-radius: 14px;
+          padding: 12px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 6px;
+          display: none;
+          z-index: 3;
+        }
+        nav.menu-open .nav-links {
+          display: flex;
+        }
+        .nav-links li {
+          width: 100%;
+        }
+        .nav-links a {
+          display: block;
+          width: 100%;
+          padding: 12px 10px;
+          font-size: 15px;
+        }
+        .nav-cta {
+          text-align: center;
+          margin-top: 4px;
+        }
+      }
+
       [data-ar] {
         display: block;
       }
@@ -1300,10 +1391,10 @@
         display: none;
       }
       body.ltr [data-ar] {
-        display: none;
+        display: none !important;
       }
       body.ltr [data-en] {
-        display: block;
+        display: block !important;
       }
       [data-ar-inline] {
         display: inline;
@@ -1312,10 +1403,10 @@
         display: none;
       }
       body.ltr [data-ar-inline] {
-        display: none;
+        display: none !important;
       }
       body.ltr [data-en-inline] {
-        display: inline;
+        display: inline !important;
       }
 
       /* Arabic readability tuning */
@@ -1326,6 +1417,32 @@
       body:not(.ltr) .hero-badge {
         font-size: 12px;
         letter-spacing: 2px;
+      }
+      body:not(.ltr) .hero-text {
+        text-align: right;
+      }
+      body:not(.ltr) .hero-actions {
+        justify-content: flex-end;
+      }
+      body:not(.ltr) .hero-title {
+        line-height: 1.2;
+      }
+      body:not(.ltr) .hero-desc {
+        font-size: 17px;
+        line-height: 2;
+        color: #b8b8b8;
+        max-width: 560px;
+        margin-right: 0;
+      }
+      body:not(.ltr) .service-title,
+      body:not(.ltr) .service-desc,
+      body:not(.ltr) .feature-text,
+      body:not(.ltr) .contact-detail,
+      body:not(.ltr) .footer-about {
+        text-align: right;
+      }
+      body:not(.ltr) .form-group label {
+        text-transform: none;
       }
       body:not(.ltr) .hero-subtitle {
         font-size: 14px;
@@ -1350,13 +1467,67 @@
         letter-spacing: 1px;
       }
 
+      /* Desktop Arabic font-size boost */
+      @media (min-width: 1025px) {
+        body:not(.ltr) .nav-links a {
+          font-size: 15px;
+        }
+        body:not(.ltr) .hero-badge {
+          font-size: 13px;
+        }
+        body:not(.ltr) .hero-subtitle {
+          font-size: 15px;
+          letter-spacing: 1.2px;
+        }
+        body:not(.ltr) .section-tag {
+          font-size: 13px;
+          letter-spacing: 1.2px;
+        }
+        body:not(.ltr) .stat-label {
+          font-size: 15px;
+        }
+        body:not(.ltr) .contact-detail .label,
+        body:not(.ltr) .form-group label {
+          font-size: 13px;
+        }
+        body:not(.ltr) .footer-col a,
+        body:not(.ltr) .footer-copy {
+          font-size: 16px;
+        }
+      }
+
       /* RESPONSIVE */
       @media (max-width: 900px) {
         nav {
-          padding: 20px 24px;
+          padding: 14px 16px;
+          min-height: 78px;
         }
-        .nav-links {
-          display: none;
+        nav.scrolled {
+          padding: 14px 16px;
+        }
+        .nav-logo img {
+          height: 40px;
+          padding: 3px 6px;
+        }
+        .nav-toggle {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+        }
+        .lang-toggle {
+          top: 39px;
+          left: 50%;
+          right: auto;
+          transform: translateX(-50%);
+          z-index: 1001;
+        }
+        body.ltr .lang-toggle {
+          left: 50%;
+          right: auto;
+        }
+        .lang-btn {
+          padding: 6px 10px;
+          font-size: 11px;
         }
         #hero {
           padding: 100px 24px 60px;
@@ -1459,6 +1630,15 @@
           decoding="async"
         />
       </a>
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <ul class="nav-links">
         <li>
           <a href="#services" data-ar>خدماتنا</a
@@ -2183,6 +2363,30 @@
         document
           .getElementById("backTop")
           .classList.toggle("visible", scrollY > 400);
+      });
+
+      // MOBILE/TABLET MENU
+      const navbar = document.getElementById("navbar");
+      const navToggle = document.getElementById("navToggle");
+      const navIcon = navToggle?.querySelector("i");
+      function closeNavMenu() {
+        navbar?.classList.remove("menu-open");
+        navToggle?.setAttribute("aria-expanded", "false");
+        if (navIcon) navIcon.className = "fa-solid fa-bars";
+      }
+      navToggle?.addEventListener("click", () => {
+        const isOpen = navbar?.classList.toggle("menu-open");
+        navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        if (navIcon)
+          navIcon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+      });
+      document.querySelectorAll("#navbar .nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 1024) closeNavMenu();
+        });
+      });
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 1024) closeNavMenu();
       });
 
       function scrollToTop() {
