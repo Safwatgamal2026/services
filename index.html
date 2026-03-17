@@ -628,8 +628,8 @@
 
       .hero-visual-inner {
         position: relative;
-        width: 400px;
-        height: 400px;
+        width: 430px;
+        height: 430px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -654,26 +654,26 @@
       }
       .hero-logo-ring-2 {
         position: absolute;
-        inset: 36px;
+        inset: 40px;
         border-radius: 50%;
         border: 1px dashed rgba(201, 168, 76, 0.1);
         animation: spin 15s linear infinite reverse;
       }
 
       .hero-logo-box {
-        width: 250px;
-        height: 250px;
-        background: linear-gradient(
-          145deg,
-          rgba(255, 255, 255, 0.96),
-          rgba(242, 238, 230, 0.96)
-        );
+        width: 280px;
+        height: 280px;
+        background: rgba(228, 228, 228, 0.9);
+        border-radius: 50% !important;
         border: 1px solid rgba(201, 168, 76, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
         position: relative;
-        animation: fadeIn 1.2s ease both;
+        animation:
+          fadeIn 1.2s ease both,
+          logoAura 3.8s ease-in-out infinite;
       }
       .hero-logo-box::before,
       .hero-logo-box::after {
@@ -695,13 +695,15 @@
         border-width: 0 0 2px 2px;
       }
       .hero-logo-box img {
-        width: 190px;
-        height: auto;
+        width: 230px;
+        height: 230px;
         display: block;
         object-fit: contain;
-        border-radius: 12px;
-        border: 1px solid rgba(201, 168, 76, 0.3);
+        border-radius: 50% !important;
+        border: 1px solid rgba(201, 168, 76, 0.45);
+        background: transparent;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.26);
+        transform: scale(1.05);
         filter: none;
       }
 
@@ -2050,6 +2052,21 @@
           transform: translateY(-3px);
         }
       }
+      @keyframes logoAura {
+        0%,
+        100% {
+          box-shadow:
+            0 0 0 0 rgba(201, 168, 76, 0.2),
+            0 18px 36px rgba(0, 0, 0, 0.26);
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          box-shadow:
+            0 0 42px 10px rgba(201, 168, 76, 0.33),
+            0 24px 42px rgba(0, 0, 0, 0.3);
+          transform: translateY(-2px) scale(1.015);
+        }
+      }
 
       @media (prefers-reduced-motion: reduce) {
         .ambient-dot,
@@ -2058,7 +2075,8 @@
         .whatsapp-notify,
         .contact-icon,
         .contact-icon::after,
-        .testimonials-track {
+        .testimonials-track,
+        .hero-logo-box {
           animation: none !important;
           transition: none !important;
         }
@@ -2126,18 +2144,19 @@
 
       @media (max-width: 1200px) {
         .hero-visual-inner {
-          width: 350px;
-          height: 350px;
+          width: 380px;
+          height: 380px;
         }
         .hero-logo-ring-2 {
-          inset: 32px;
+          inset: 36px;
         }
         .hero-logo-box {
-          width: 220px;
-          height: 220px;
+          width: 250px;
+          height: 250px;
         }
         .hero-logo-box img {
-          width: 165px;
+          width: 195px;
+          height: 195px;
         }
         .nav-links {
           gap: 18px;
